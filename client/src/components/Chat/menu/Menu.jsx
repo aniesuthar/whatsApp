@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Header from './Header'
 import Search from './Search';
+import Conversations from './Conversations';
 
 
 function Menu() {
@@ -11,6 +12,7 @@ function Menu() {
     <div>
         <Header/>
         <Search setText={setText} />
+        <Conversations/>
     </div>
   )
 }

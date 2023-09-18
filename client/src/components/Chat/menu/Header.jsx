@@ -44,7 +44,7 @@ function Header() {
     return (
         <>
             <Component>
-                <Image src={account.picture} alt="Profile Image" onClick={() => toggleDrawer()}  />
+                <Image src={account.picture} alt="Profile Image" referrerPolicy="no-referrer" onClick={() => toggleDrawer()}  />
                 <Wrapper>
                     <IconButton><DonutLargeIcon /></IconButton>
                     <IconButton><ChatIcon/></IconButton>

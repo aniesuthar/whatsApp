@@ -47,7 +47,7 @@ function Profile() {
   return (
     <>
     <ImageContainer>
-                <Image src={account.picture} alt="displaypicture" />
+                <Image src={account.picture} alt="displaypicture" referrerPolicy="no-referrer"/>
             </ImageContainer>
             <BoxWrapper>
                 <Typography>Your name</Typography>
