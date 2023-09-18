@@ -17,7 +17,7 @@ const StyledDivider = styled(Divider)`
 `;
 
 
-function Conversations() {
+function Conversations( {text} ) {
 
     const [users, setUsers] = useState([]);
     const { account } = useContext(AccountContext);
@@ -26,15 +26,15 @@ function Conversations() {
     useEffect(() => {
         const fetchData = async () => {
             let data = await getUsers();
-            // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-            setUsers(data);
+            let filteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
+            setUsers(filteredData);
         }
         fetchData();
-    }, []);
+    }, [text]);
 
 
     return (
-        <Component>
+        <Component >
             {
                 users && users.map((user, index) => (
                     user.sub !== account.sub &&

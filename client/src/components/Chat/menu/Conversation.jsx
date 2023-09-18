@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useContext } from 'react'
 import { styled, Box, Typography } from "@mui/material";
 import { emptyProfilePicture } from '../../../constants/data';
+import { AccountContext } from '../../../context/AccountProvider';
+import { setConversation } from '../../../service/api';
+
+
 
 
 const Component = styled(Box)`
@@ -25,10 +29,18 @@ const Container = styled(Box)`
 
 
 function Conversation({ user }) {
+
     const url = user.picture || emptyProfilePicture;
+    const {setPerson, account} = useContext(AccountContext);
+
+    const getUser = async () =>{
+        setPerson(user);
+        await setConversation({ senderId: account.sub, receiverId: user.sub})
+    }
+
 
     return (
-        <Component>
+        <Component onClick={() => getUser()}>
             <Box>
                 <Image src={url} alt="display picture" />
             </Box>

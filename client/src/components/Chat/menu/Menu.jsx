@@ -12,7 +12,7 @@ function Menu() {
     <div>
         <Header/>
         <Search setText={setText} />
-        <Conversations/>
+        <Conversations text={text}/>
     </div>
   )
 }
