@@ -29,7 +29,40 @@ const Container = styled(Box)`
 
 
 
+
+
+
 function Messages() {
+
+  
+    const sendText = async (e) => {
+        let code = e.keyCode || e.which;
+        if(!value) return;
+
+        if(code === 13) { 
+            let message = {};
+            if (!file) {
+                message = {
+                    senderId: account.sub,
+                    receiverId: receiverId,
+                    conversationId: conversation._id,
+                    type: 'text',
+                    text: value
+                };
+            } else {
+                message = {
+                    senderId: account.sub,
+                    conversationId: conversation._id,
+                    receiverId: receiverId,
+                    type: 'file',
+                    text: image
+                };
+            }
+        }
+    }
+
+
+
   return (
     <Wrapper>
         Messages
@@ -42,7 +75,11 @@ function Messages() {
                     ))
                 } */}
             </Component>
-            <Footer />
+            <Footer 
+             sendText={sendText} 
+             value={value} 
+             setValue={setValue} 
+            />
         </Wrapper>
   )
 }
