@@ -5,6 +5,7 @@ import { Box, styled, InputBase } from '@mui/material';
 
 import { uploadFile } from '../../../service/api';
 
+
 const Container = styled(Box)`
     height: 55px;
     background: #ededed;
@@ -38,7 +39,7 @@ const ClipIcon = styled(AttachFile)`
 `;
 
 
-const Footer = ({ sendText, value, setValue, setFile, file, setImage }) => {
+const Footer = ({ sendText, setValue, value, setFile, file, setImage }) => {
 
     useEffect(() => {
         const getImage = async () => {
@@ -71,7 +72,6 @@ const Footer = ({ sendText, value, setValue, setFile, file, setImage }) => {
                 style={{ display: 'none' }}
                 onChange={(e) => onFileChange(e)}
             />
-
             <Search>
                 <InputField
                     placeholder="Type a message"
