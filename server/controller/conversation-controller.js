@@ -14,7 +14,7 @@ export const newConversation = async ( request, response) => {
         }
 
         const newConversation = new conversation({
-            members: []
+            members: [senderId, receiverId]
         });
         await newConversation.save();
         return response.status(200).json('conversation saved successfully');
@@ -22,4 +22,14 @@ export const newConversation = async ( request, response) => {
         return response.status(500).json(error.message);
     }
      
+}
+
+export const getConversation = async (request, response) =>{
+    try{
+        let Conversation = await conversation.findOne({ members: { $all: [request.body.receiverId, request.body.senderId] }});
+        response.status(200).json(Conversation);
+
+    }catch (error){
+        response.status(500).json(error.message);
+    }
 }
