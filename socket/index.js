@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 
 const io = new Server(8000, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: "http://localhost:3000" || "https://pf-whatsapp.vercel.app",
     }, 
 })
 
@@ -11,6 +11,10 @@ let users = [];
 
 const addUser = (userData, socketId) => {
     !users.some(user => user.sub === userData.sub) && users.push({ ...userData, socketId });
+}
+
+const removeUser = (socketId) => {
+    users = users.filter(user => user.socketId !== socketId);
 }
 
 const getUser = (userId) => {
@@ -32,4 +36,10 @@ io.on('connection',  (socket) => {
         io.to(user.socketId).emit('getMessage', data)
     })
 
+        //disconnect
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+            removeUser(socket.id);
+            io.emit('getUsers', users);
+        })
 })

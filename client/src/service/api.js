@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = `"http://localhost:9000" || ""`;
+const url = "http://localhost:9000" || "https://pf-whatsapp.onrender.com";
 
 export const addUser = async (data) => {
     try {
