@@ -48,15 +48,14 @@ const ChatHeader = ({person}) => {
 
     return (
         <Header>
-            <Image src={url} alt="display picture" alt="dp"/>     
+            <Image src={url} alt="DP"/>     
             <Box>
                 <Name>{person.name}</Name>
-                <Status>Online</Status> 
+                <Status>{activeUsers?.find(user => user.sub === person.sub) ? "Online" : "Last seen Recently" }</Status> 
             </Box>   
             <RightContainer>
                 <IconButton><Search /></IconButton> 
                 <IconButton><MoreVert /></IconButton> 
-                
             </RightContainer> 
         </Header>
     )
