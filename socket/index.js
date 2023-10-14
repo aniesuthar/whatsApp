@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 
 const io = new Server(8000, {
     cors: {
-        origin:  "https://pf-whatsapp.vercel.app" || "http://localhost:3000",
+        origin:  'http://localhost:3000'
     }, 
 })
 

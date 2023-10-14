@@ -74,7 +74,7 @@ function Conversation({ user }) {
                     }
                 </Container>
                 <Box>
-                    <Text>{message?.text?.includes('localhost') ? 'media' : message.text}</Text>
+                    <Text>{(message?.text?.includes('localhost') || message?.text?.includes('onrender')) ? 'media' : message.text}</Text>
                 </Box>
             </Box>
         </Component>

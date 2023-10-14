@@ -1,7 +1,7 @@
 import grid from 'gridfs-stream';
 import mongoose from 'mongoose';
 
-const url = "https://pf-whatsapp.onrender.com" || "http://localhost:9000";
+const url =  "http://localhost:9000";
 
 
 let gfs, gridfsBucket;

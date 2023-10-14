@@ -13,8 +13,10 @@ const storage = new GridFsStorage({
     
     url: `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.qmiqfpi.mongodb.net/?retryWrites=true&w=majority`,
     options: { useUnifiedTopology: true, useNewUrlParser: true},
-    file: (request, file) => {
+    file: (request, 
+        file) => {
         const match = ["image/png", "image/jpg"];
+
 
         if(match.indexOf(file.memeType) === -1) 
             return`${Date.now()}-blog-${file.originalname}`;
@@ -25,5 +27,8 @@ const storage = new GridFsStorage({
         }
     }
 })
+
+
+
 
 export default multer({storage});

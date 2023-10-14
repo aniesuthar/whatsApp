@@ -71,6 +71,8 @@ const Messages = ({ person, conversation }) => {
         let code = e.keyCode || e.which;
         if(!value) return;
 
+        
+
         if(code === 13) { 
             let message = {};
             if (!file) {
@@ -100,6 +102,36 @@ const Messages = ({ person, conversation }) => {
             setNewMessageFlag(prev => !prev);
         } 
     }
+    const sendMedia = async (e) => {
+ 
+            let message = {};
+            if (!file) {
+                message = {
+                    senderId: account.sub,
+                    receiverId: person.sub,
+                    conversationId: conversation._id,
+                    type: 'text',
+                    text: value
+                };
+            } else {
+                message = {
+                    senderId: account.sub,
+                    conversationId: conversation._id,
+                    receiverId: person.sub,
+                    type: 'file',
+                    text: image
+                };
+            }
+
+            socket.current.emit('sendMessage', message);
+            await newMessage(message);
+
+            setValue('');
+            setFile();
+            setImage('');
+            setNewMessageFlag(prev => !prev);
+        } 
+    
 
     return (
         <Wrapper>
@@ -113,7 +145,8 @@ const Messages = ({ person, conversation }) => {
                 }
             </Component>
             <Footer 
-                sendText={sendText} 
+                sendText={sendText}
+                sendMedia={sendMedia}
                 value={value} 
                 setValue={setValue} 
                 setFile={setFile} 

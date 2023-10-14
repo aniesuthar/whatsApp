@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
+import SendIcon from '@mui/icons-material/Send';
 import { Box, styled, InputBase } from '@mui/material';
 
 import { uploadFile } from '../../../service/api';
@@ -9,6 +10,7 @@ import { uploadFile } from '../../../service/api';
 const Container = styled(Box)`
     height: 55px;
     background: #ededed;
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
@@ -16,6 +18,20 @@ const Container = styled(Box)`
     &  > * {
         margin: 5px;
         color: #919191;
+    }
+`;
+const PreviewContainer = styled(Box)`
+    height: 220px;
+    padding: 12px;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 80px;
+    background: #00bfa5;
+    width: fit-content;
+    &  > button {
+        position:absolute;
+        bottom: 20px;
+        right: 20px;
     }
 `;
 
@@ -39,7 +55,9 @@ const ClipIcon = styled(AttachFile)`
 `;
 
 
-const Footer = ({ sendText, setValue, value, setFile, file, setImage }) => {
+const Footer = ({ sendText, sendMedia, setValue, value, setFile, file, setImage }) => {
+
+    const [previewURL, setPreviewURL] =  useState();
 
     useEffect(() => {
         const getImage = async () => {
@@ -47,6 +65,7 @@ const Footer = ({ sendText, setValue, value, setFile, file, setImage }) => {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("file", file);
+                setPreviewURL(URL.createObjectURL(file));
 
                 const response = await uploadFile(data);
                 setImage(response.data);
@@ -72,6 +91,11 @@ const Footer = ({ sendText, setValue, value, setFile, file, setImage }) => {
                 style={{ display: 'none' }}
                 onChange={(e) => onFileChange(e)}
             />
+            {file &&
+            <PreviewContainer>
+                <img src={previewURL} alt="preview" title="Your file input" style={{maxHeight: "100%"}}/>
+                <button onClick={(e)=>sendMedia(e)}><SendIcon/></button>
+            </PreviewContainer>}
             <Search>
                 <InputField
                     placeholder="Type a message"
@@ -82,6 +106,7 @@ const Footer = ({ sendText, setValue, value, setFile, file, setImage }) => {
                 />
             </Search>
             <Mic />
+            
         </Container>
     )
 }
